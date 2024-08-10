@@ -7,10 +7,13 @@ class pet():
         self.window = tk.Tk()
 
         # placeholder image
-        self.walking_right = [tk.PhotoImage(file='C:/Program Files/Vtuber Virtual Assitant/Desktop Pet Assistant/Gif/sayu-sayu-sincronisity.gif', format='gif -index %i' % (i)) for i in range(4)]
+        self.walking_right = [tk.PhotoImage(file="C:/Program Files/Vtuber Virtual Assitant/Ethyria/Wiggle_EnnaAlouette(NoAcc)_320.gif", format='gif -index %i' % (i)) for i in range(10)]
 
         self.frame_index = 0
         self.img = self.walking_right[self.frame_index]
+
+        # timestamp to check whether to advance frame
+        self.timestamp = time.time()
         # set focushighlight to black when the window does not have focus
         self.window.config(highlightbackground='black')
 
@@ -27,6 +30,7 @@ class pet():
         self.label = tk.Label(self.window, bd=0, bg='black')
 
         # create a window of size 128x128 pixels, at coordinates 0,0
+        self.x = 0
         self.window.geometry('150x250+0+0')
 
         # add the image to our label
@@ -47,11 +51,11 @@ class pet():
         if time.time() > self.timestamp + 0.05:
             self.timestamp = time.time()
             # advance the frame by one, wrap back to 0 at the end
-            self.frame_index = (self.frame_index + 1) % 4
+            self.frame_index = (self.frame_index + 2) % len(self.walking_right)
             self.img = self.walking_right[self.frame_index]
 
         # create the window
-        self.window.geometry('150x250+{x}+0'.format(x=str(self.x)))
+        self.window.geometry('300x500+{x}+600'.format(x=str(self.x)))
         # add the image to our label
         self.label.configure(image=self.img)
         # give window to geometry manager (so it will appear)
